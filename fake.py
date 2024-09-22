@@ -37,11 +37,11 @@ async def send_packet(data, to_port):
         packets[to_port]["p"].payload.payload.payload = Raw(data)
 
     elif config["fake_mode"] == 2:
-        packets[to_port]["p"].payload.payload.seq += 1000
+        packets[to_port]["p"].payload.payload.seq += 2000
         packets[to_port]["p"].payload.payload.payload = Raw(urandom(30) + data) 
 
     elif config["fake_mode"] == 3:
-        packets[to_port]["p"].payload.payload.seq -= 1000
+        packets[to_port]["p"].payload.payload.seq -= 2000
         packets[to_port]["p"].payload.payload.payload = Raw(urandom(30) + data) 
 
     elif config["fake_mode"] == 4:
