@@ -1,0 +1,8 @@
+dns: false
+dns_server: 9.9.9.9
+fake: true
+fragment: false
+port: 8881
+proxy: true
+fake_mode: 4
+debug: true
