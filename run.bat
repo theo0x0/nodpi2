@@ -1,0 +1,2 @@
+python nodpi.py
+pause
