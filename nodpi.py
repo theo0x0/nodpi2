@@ -71,7 +71,7 @@ async def main():
         from fake import AsyncSniffer, listen_interface
 
         AsyncSniffer(prn=listen_interface, store=False).start()
-        print(f"Включена откправка фейк пакетов, режим {config['fake_mode']}")
+        print(f"Включена отправка фейк пакетов, режим {config['fake_mode']}")
 
     await server.serve_forever()
     
