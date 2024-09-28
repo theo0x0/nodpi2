@@ -102,7 +102,7 @@ async def make_pipe(local_reader, local_writer, host = None, port = 443):
         ip = host
 
     try:
-        remote_reader, remote_writer = await asyncio.open_connection(ip, port)
+        remote_reader, remote_writer = await asyncio.open_connection(ip, port, family=socket.AF_INET)
     except:
         local_writer.close()
         return
