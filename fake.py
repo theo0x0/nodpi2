@@ -36,8 +36,6 @@ async def send_packet(data, to_port):
     packets[to_port]["p"].payload.payload.payload = Raw(data)
 
     
-    if 4 in config["fake_mode"]:
-        packets[to_port]["p"].payload.payload.chksum = randint(0, 256*256-2)
 
     if 3 in config["fake_mode"]:
         packets[to_port]["p"].payload.payload.dataofs = packets[to_port]["p"].payload.payload.dataofs + 5
@@ -47,9 +45,6 @@ async def send_packet(data, to_port):
 
     if 2 in config["fake_mode"]:
         packets[to_port]["p"].payload.payload.seq += 2000
-
-    if 5 in config["fake_mode"]:
-        packets[to_port]["p"].payload.chksum = randint(0, 256*256-2)
 
 
 
