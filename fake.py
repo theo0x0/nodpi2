@@ -6,6 +6,7 @@ from scapy.sendrecv import AsyncSniffer, sendp
 from os import urandom
 from nodpi import config
 import asyncio
+from random import randint
 
 ports = []
 packets = {}
@@ -32,32 +33,37 @@ async def send_packet(data, to_port):
     packets[to_port]["p"].payload.payload.flags = packets[to_port]["p"].payload.payload.flags.value | 8
     packets[to_port]["p"].payload.payload.seq = packets[to_port]["ack"]
 
-    if config["fake_mode"] == 1:
-        packets[to_port]["p"].payload.ttl=distance - 3
+    
+    if 1 in config["fake_mode_add"]:
+        packets[to_port]["p"].payload.payload.chksum = randint(0, 256*256-2)
+
+    if 2 in config["fake_mode_add"]:
+        packets[to_port]["p"].payload.payload.dataofs = packets[to_port]["p"].payload.payload.dataofs + 5
+
+    if 1 in config["fake_mode"]:
+        packets[to_port]["p"].payload.ttl=distance-3
         packets[to_port]["p"].payload.payload.payload = Raw(data)
 
-    elif config["fake_mode"] == 2:
+    if 2 in config["fake_mode"]:
         packets[to_port]["p"].payload.payload.seq += 2000
         packets[to_port]["p"].payload.payload.payload = Raw(urandom(30) + data) 
 
-    elif config["fake_mode"] == 3:
+    if 3 in config["fake_mode"]:
         packets[to_port]["p"].payload.payload.seq -= 2000
         packets[to_port]["p"].payload.payload.payload = Raw(urandom(30) + data) 
 
-    elif config["fake_mode"] == 4:
+    if 4 in config["fake_mode"]:
         packets[to_port]["p"].payload.dst = "8.8.8.8"
         packets[to_port]["p"].payload.payload.payload = Raw(data)
 
-    elif config["fake_mode"] == 5:
+    if 5 in config["fake_mode"]:
         packets[to_port]["p"].payload.payload.dport = 53
         packets[to_port]["p"].payload.payload.payload = Raw(data)
 
-    elif config["fake_mode"] == 6:
+    if 6 in config["fake_mode"]:
         packets[to_port]["p"].payload.src = "8.8.8.8"
         packets[to_port]["p"].payload.payload.payload = Raw(data)
 
-    else:
-        return False
 
     sendp(packets[to_port]["p"].build(), verbose=False)
 

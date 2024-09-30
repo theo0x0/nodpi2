@@ -4,5 +4,8 @@ fake: true
 fragment: false
 port: 8881
 proxy: true
-fake_mode: 4
+fake_mode:
+- 1
+fake_mode_add:
+- 1
 debug: false

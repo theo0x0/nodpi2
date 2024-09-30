@@ -71,7 +71,7 @@ async def main():
         from fake import AsyncSniffer, listen_interface
 
         AsyncSniffer(prn=listen_interface, store=False).start()
-        print(f"Включена отправка фейк пакетов, режим {config['fake_mode']}")
+        print(f"Включена отправка фейк пакетов, режимы fake_mode {config['fake_mode']} и fake_mode_add {config['fake_mode_add']}")
 
     await server.serve_forever()
     
@@ -154,12 +154,9 @@ async def fragment(data, remote_writer, host):
             data = data[1:]
             fake_data = fake_data[1:]
 
-            if config["fake_mode"] in [1, 4, 5, 6]:
-                if await send_packet(fake_data, local_port):
-                    break
-            else:
-                if await send_packet(data, local_port):
-                    break
+            if await send_packet(fake_data, local_port):
+                break
+         
 
         #print(i)
 
@@ -177,7 +174,7 @@ local_ip = get_local_ip()
 if __name__ == "__main__":
     
 
-    print("Версия: 2.3")
+    print("Версия: 2.4")
     print("Не закрывайте окно")
 
     asyncio.run(main())
