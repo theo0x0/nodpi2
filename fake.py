@@ -29,9 +29,11 @@ async def send_packet(data, to_port):
 
     packets[to_port]["p"].payload.chksum=None
     packets[to_port]["p"].payload.len=None
+
     packets[to_port]["p"].payload.payload.chksum= None
     packets[to_port]["p"].payload.payload.flags = packets[to_port]["p"].payload.payload.flags.value | 8
     packets[to_port]["p"].payload.payload.seq = packets[to_port]["ack"]
+    packets[to_port]["p"].payload.payload.payload = Raw(data)
 
     
     if 1 in config["fake_mode_add"]:
@@ -42,27 +44,22 @@ async def send_packet(data, to_port):
 
     if 1 in config["fake_mode"]:
         packets[to_port]["p"].payload.ttl=distance-3
-        packets[to_port]["p"].payload.payload.payload = Raw(data)
 
     if 2 in config["fake_mode"]:
         packets[to_port]["p"].payload.payload.seq += 2000
-        packets[to_port]["p"].payload.payload.payload = Raw(urandom(30) + data) 
 
     if 3 in config["fake_mode"]:
         packets[to_port]["p"].payload.payload.seq -= 2000
-        packets[to_port]["p"].payload.payload.payload = Raw(urandom(30) + data) 
 
     if 4 in config["fake_mode"]:
         packets[to_port]["p"].payload.dst = "8.8.8.8"
-        packets[to_port]["p"].payload.payload.payload = Raw(data)
+        
 
     if 5 in config["fake_mode"]:
         packets[to_port]["p"].payload.payload.dport = 53
-        packets[to_port]["p"].payload.payload.payload = Raw(data)
 
     if 6 in config["fake_mode"]:
         packets[to_port]["p"].payload.src = "8.8.8.8"
-        packets[to_port]["p"].payload.payload.payload = Raw(data)
 
 
     sendp(packets[to_port]["p"].build(), verbose=False)

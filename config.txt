@@ -7,5 +7,5 @@ proxy: true
 fake_mode:
 - 1
 fake_mode_add:
-- 1
+- 2
 debug: false
