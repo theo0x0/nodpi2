@@ -71,7 +71,7 @@ async def main():
         from fake import AsyncSniffer, listen_interface
 
         AsyncSniffer(prn=listen_interface, store=False).start()
-        print(f"Включена отправка фейк пакетов, режимы fake_mode {config['fake_mode']} и fake_mode_add {config['fake_mode_add']}")
+        print(f"Включена отправка фейк пакетов, режимы {config['fake_mode']}")
 
     await server.serve_forever()
     
@@ -174,7 +174,7 @@ local_ip = get_local_ip()
 if __name__ == "__main__":
     
 
-    print("Версия: 2.4")
+    print("Версия: 2.5")
     print("Не закрывайте окно")
 
     asyncio.run(main())
