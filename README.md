@@ -1,5 +1,7 @@
 # No DPI [Ver. 2.5]
 Uses simple SSL fragmentation or fake packets to avoid DPI.
+TCP: short ttl, fake data offset, fake seq number
+Can be used as a dns server to send traffic from remote devices that can not use http proxy.
 No system privileges needed.
 
 Currently works in Russia.
