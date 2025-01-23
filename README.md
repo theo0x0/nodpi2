@@ -1,5 +1,5 @@
 # No DPI [Ver. 2.5]
-Uses simple SSL fragmentation or fake packets to avoid DPI.
+Uses simple SSL fragmentation or fake packets to avoid DPI. To send and capture packets used [scapy](https://github.com/secdev/scapy/tree/master)
 
 
 TCP: short ttl, fake data offset, fake seq number
@@ -28,4 +28,4 @@ Requires: Python >= 3.8, npcap
 - Doesn't bypass IP block
 - Only TCP
 - Doesn't work for HTTP only
-- Not working for blocked sites with old TLS
+- Captures packets slowly
