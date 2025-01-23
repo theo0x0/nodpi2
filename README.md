@@ -15,7 +15,7 @@ Alternatives: [GoodbyeDPI](https://github.com/ValdikSS/GoodbyeDPI)
 
 ## How to install
 
-Requires: Python >= 3.8, npcap
+Requires: Python >= 3.8, [npcap (windows)](https://npcap.com/)
 
 1) Download file nodpi.py and run `python3 nodpi.py` or open nodpi.py file
 2) Configure browser to use proxy on 127.0.0.1:8881 or configure your system to use local dns server
